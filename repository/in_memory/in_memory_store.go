@@ -1,8 +1,7 @@
 package in_memory
 
 import (
-	"fiz-buzz-server/model"
-	"fiz-buzz-server/repository"
+	"github.com/sekou-diarra/fiz-buzz-server/model"
 	"sort"
 )
 
@@ -35,9 +34,11 @@ func (i *inMemoryStore) GetMaxHitsQuery() *model.StatResponse {
 	for _, models := range i.storage {
 		internals = append(internals, models)
 	}
-	sort.SliceStable(internals, func(i, j int) bool {
-		return internals[i].hits > internals[j].hits
-	})
+	sort.SliceStable(
+		internals, func(i, j int) bool {
+			return internals[i].hits > internals[j].hits
+		},
+	)
 
 	return &model.StatResponse{
 		Hits:            internals[0].hits,
@@ -53,6 +54,6 @@ func (i *inMemoryStore) GetAll() []string {
 	return elements
 }
 
-func NewInMemoryStore() repository.StatStore {
-	return &inMemoryStore{storage: make(map[string]internalModel)}
+func NewInMemoryStore() *inMemoryStore {
+	return &inMemoryStore{storage: make(map[string]internalModel, 10000)}
 }

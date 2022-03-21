@@ -1,7 +1,7 @@
 package in_memory
 
 import (
-	"fiz-buzz-server/repository/suitetest"
+	"github.com/sekou-diarra/fiz-buzz-server/service/stats/suitetest"
 	"testing"
 )
 
